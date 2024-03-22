@@ -8,6 +8,7 @@ require_relative '../models/level'
 require_relative '../models/log'
 
 require_relative '../scenes/title_scene'
+require_relative '../scenes/pause_scene'
 
 class MainScene
   def initialize(window)
@@ -94,8 +95,6 @@ class MainScene
     @logs.each(&:draw)
   end
 
-  private
-
   def level_complete?
     # @frog.y <= 0
   end
@@ -119,7 +118,7 @@ class MainScene
   def button_down(id)
     case id
     when Gosu::KbEscape
-      @window.change_scene(TitleScene.new(@window))
+      @window.change_scene(PauseScene.new(@window, self))
     end
   end
 end

@@ -6,6 +6,7 @@ require_relative 'lib/models/frog'
 # Scenes
 require_relative 'lib/scenes/title_scene'
 require_relative 'lib/scenes/main_scene'
+require_relative 'lib/scenes/pause_scene'
 
 class GameWindow < Gosu::Window
   def initialize
@@ -27,12 +28,7 @@ class GameWindow < Gosu::Window
   end
 
   def button_down(id)
-    case id
-    when Gosu::KbEscape
-      close
-    else
-      @scene.button_down(id) if @scene.respond_to?(:button_down)
-    end
+    @scene.button_down(id)
   end
 end
 

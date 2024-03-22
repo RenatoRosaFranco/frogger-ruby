@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'records_scene'
+require_relative 'pause_scene'
 
 class TitleScene
   def initialize(window)

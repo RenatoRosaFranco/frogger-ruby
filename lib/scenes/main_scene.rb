@@ -1,5 +1,6 @@
 require 'gosu'
 
+require_relative '../models/car'
 require_relative '../models/frog'
 require_relative '../models/level'
 
@@ -25,6 +26,11 @@ class MainScene
     configure_log_speed(level.log_speed)
     configure_lanes(level.num_lanes)
     configure_rivers(level.num_rivers)
+
+    @cars = []
+    level.num_lanes.times do |i|
+      @cars << Car.new(@window, rand(@window.width), i * 100, level.car_speed)
+    end
   end
 
   def configure_card_speed(speed)
@@ -50,17 +56,19 @@ class MainScene
 
   def update
     handle_player_input
+    @cars.each(&:update)
     check_level_completion
   end
 
   def draw
     @frog.draw
+    @cars.each(&:draw)
   end
 
   private
 
   def level_complete?
-    @frog.y <= 0
+    # @frog.y <= 0
   end
 
   def check_level_completion

@@ -13,6 +13,7 @@ class GameWindow < Gosu::Window
     super(640, 480)
     self.caption = 'Frogger Adventures'
     @scene = TitleScene.new(self)
+    @record_service = RecordService
   end
 
   def update

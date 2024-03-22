@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 require 'gosu'
 
 require_relative '../models/car'
 require_relative '../models/frog'
 require_relative '../models/level'
+require_relative '../models/log'
 
 class MainScene
   def initialize(window)
@@ -27,9 +30,14 @@ class MainScene
     configure_lanes(level.num_lanes)
     configure_rivers(level.num_rivers)
 
-    @cars = []
+    @cars, @logs = [], []
+
     level.num_lanes.times do |i|
       @cars << Car.new(@window, rand(@window.width), i * 100, level.car_speed)
+    end
+
+    level.num_rivers.times do |i|
+      @logs << Log.new(@window, rand(@window.width), i * 150 + 100, level.log_speed)
     end
   end
 
@@ -57,12 +65,31 @@ class MainScene
   def update
     handle_player_input
     @cars.each(&:update)
+    @logs.each(&:update)
+
+    if frog_on_log?
+      @frog.x += log_under_frog.speed
+    end
+
     check_level_completion
+  end
+
+  def frog_on_log?
+    @logs.any? do |log|
+      Gosu.distance(@frog.x, @frog.y, log.x + log.image.width / 2, log.y + log.image.height / 2) < 50
+    end
+  end
+
+  def log_under_frog
+    @logs.find do |log|
+      Gosu.distance(@frog.x, @frog.y, log.x + log.image.width / 2, log.y + log.image.height / 2) < 50
+    end
   end
 
   def draw
     @frog.draw
     @cars.each(&:draw)
+    @logs.each(&:draw)
   end
 
   private

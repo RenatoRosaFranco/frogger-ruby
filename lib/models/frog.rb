@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Frog
+  attr_reader :x, :y
+
   def initialize(window)
     @image = Gosu::Image.new(window, 'assets/sprites/frog.png', false)
     @x, @y = 320, 240

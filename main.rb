@@ -1,6 +1,11 @@
+# frozen_string_literal: true
+
 require 'gosu'
 require_relative 'lib/models/frog'
+
+# Scenes
 require_relative 'lib/scenes/main_scene.rb'
+
 class GameWindow < Gosu::Window
   def initialize
     super(640, 480)

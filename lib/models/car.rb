@@ -8,7 +8,7 @@ class Car
     @window = window
     @x, @y = x, y
     @speed = speed
-    @image = Gosu::Image.new(window, 'assets/sprites/frog.png', false)
+    @image = Gosu::Image.new('assets/sprites/frog.png', retro: true, tileable: false)
   end
 
   def update

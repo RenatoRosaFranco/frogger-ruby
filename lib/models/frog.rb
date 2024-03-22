@@ -4,7 +4,7 @@ class Frog
   attr_reader :x, :y
 
   def initialize(window)
-    @image = Gosu::Image.new(window, 'assets/sprites/frog.png', false)
+    @image = Gosu::Image.new('assets/sprites/frog.png', retro: true, tileable: false)
     @x, @y = 320, 240
   end
 

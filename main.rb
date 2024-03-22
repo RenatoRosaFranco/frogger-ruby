@@ -27,7 +27,12 @@ class GameWindow < Gosu::Window
   end
 
   def button_down(id)
-    close if id ==Gosu::KbEscape
+    case id
+    when Gosu::KbEscape
+      close
+    else
+      @scene.button_down(id) if @scene.respond_to?(:button_down)
+    end
   end
 end
 

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'records_scene'
+
 class TitleScene
   def initialize(window)
     @window = window
@@ -22,8 +24,7 @@ class TitleScene
       when 0
         @window.change_scene(MainScene.new(@window))
       when 1
-        # TODO: Implement Records screen
-        # @window.change_scene(RecordsScene.new(@window))
+        @window.change_scene(RecordsScene.new(@window))
       when 2
         @window.close
       end
@@ -34,6 +35,15 @@ class TitleScene
     @menu_items.each_with_index do |item, index|
       color = index == @current_selection ? Gosu::Color::YELLOW : Gosu::Color::WHITE
       @font.draw_text(item, 100, 100 + 30 * index, 1, 1.0, 1.0, color)
+    end
+  end
+
+  def button_down(id)
+    case id
+    when Gosu::KbReturn
+      # TODO: to be implemented
+    when Gosu::KbEscape
+      @window.close
     end
   end
 end

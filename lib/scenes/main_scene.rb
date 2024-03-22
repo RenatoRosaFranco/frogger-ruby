@@ -7,6 +7,8 @@ require_relative '../models/frog'
 require_relative '../models/level'
 require_relative '../models/log'
 
+require_relative '../scenes/title_scene'
+
 class MainScene
   def initialize(window)
     @window = window
@@ -111,6 +113,13 @@ class MainScene
       @frog.move_left
     elsif @window.button_down?(Gosu::KbRight)
       @frog.move_right
+    end
+  end
+
+  def button_down(id)
+    case id
+    when Gosu::KbEscape
+      @window.change_scene(TitleScene.new(@window))
     end
   end
 end
